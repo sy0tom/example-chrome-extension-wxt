@@ -8,14 +8,14 @@
   --breakpoint-xl: 1440px;
 
   /* colors */
-  --color-primary: #EB3335;
-  --color-primary-light: #E3645E;
-  --color-primary-dark: #C12123;
-  --color-secondary: #007C80;
-  --color-secondary-light: #66C6C8;
+  --color-primary: #eb3335;
+  --color-primary-light: #e3645e;
+  --color-primary-dark: #c12123;
+  --color-secondary: #007c80;
+  --color-secondary-light: #66c6c8;
   --color-secondary-dark: #005656;
 
   /* fontFamily */
-  --font-sans: 'Graphik', 'sans-serif';
-  --font-serif: 'Merriweather', 'serif';
+  --font-sans: "Graphik", "sans-serif";
+  --font-serif: "Merriweather", "serif";
 }

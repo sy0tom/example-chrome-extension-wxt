@@ -1,6 +1,6 @@
+import { Button } from "@/entrypoints/components/button";
 import { useForm } from "react-hook-form";
 import { UserSettings } from "~/types";
-import { Button } from "@/entrypoints/components/button";
 
 interface Props {
   userSettings: UserSettings;
