@@ -1,7 +1,7 @@
 import { HashRouter, Route, Routes } from "react-router";
 import { IconType } from "../components/icon/Icon";
 import { Sidebar } from "../components/sidebar";
-import { UserSettingPage } from "./features/user-setting";
+import { UserSettingPage } from "./features/user-settings";
 import { FeedbackPage } from "./features/feedback";
 
 const sidebarItems: { title: string; link: string; iconType: IconType }[] = [
