@@ -1,5 +1,11 @@
 import { Button } from "@/entrypoints/components/button";
-import { useForm } from "react-hook-form";
+import {
+  FieldError,
+  FieldValues,
+  Path,
+  useForm,
+  UseFormRegister,
+} from "react-hook-form";
 import { UserSettings } from "~/types";
 
 interface Props {
@@ -22,7 +28,7 @@ function UserSettingsForm({ userSettings }: Props) {
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitting },
+    formState: { errors, isSubmitting },
   } = useForm<UserSettingsFormData>({
     defaultValues: convertToFormData(userSettings),
   });
@@ -43,22 +49,32 @@ function UserSettingsForm({ userSettings }: Props) {
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="jiraApiKey">Jira API Key</label>
-        <input id="jiraApiKey" type="password" {...register("jiraApiKey")} />
-        <label htmlFor="jiraDefaultTags">Jira Default Tags</label>
-        <input
-          id="jiraDefaultTags"
+        <FormInput
+          label="Jira Default Tags"
+          name="jiraDefaultTags"
           type="text"
-          {...register("jiraDefaultTags")}
+          register={register}
         />
-        <label htmlFor="JiraDefaultComments">Jira Default Components</label>
-        <input
-          id="jiraDefaultComponents"
+        <FormInput
+          label="Jira Default Components"
+          name="jiraDefaultComponents"
           type="text"
-          {...register("jiraDefaultComponents")}
+          register={register}
         />
-        <label htmlFor="deepLApiKey">DeepL API Key</label>
-        <input id="deepLApiKey" type="password" {...register("deepLApiKey")} />
+        <FormInput
+          label="Jira API Key"
+          name="jiraApiKey"
+          type="password"
+          register={register}
+          error={errors.jiraApiKey}
+        />
+        <FormInput
+          label="DeepL API Key"
+          name="deepLApiKey"
+          type="password"
+          register={register}
+          error={errors.deepLApiKey}
+        />
         <Button
           type="button"
           color="secondary"
@@ -74,6 +90,29 @@ function UserSettingsForm({ userSettings }: Props) {
           disabled={isSubmitting}
         />
       </form>
+    </div>
+  );
+}
+
+interface FormInputProps<T extends FieldValues> {
+  label: string;
+  name: Path<T>;
+  type: "text" | "password";
+  register: UseFormRegister<T>;
+  error?: FieldError;
+}
+function FormInput<T extends FieldValues>({
+  label,
+  name,
+  type,
+  register,
+  error,
+}: FormInputProps<T>) {
+  return (
+    <div className="mb-4">
+      <label htmlFor={name}>{label}</label>
+      <input id={name} type={type} {...register(name)} />
+      {error && <p className="text-red-500">{error.message}</p>}
     </div>
   );
 }
