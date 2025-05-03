@@ -28,6 +28,7 @@ async function fetchUserSettings(): Promise<UserSettings> {
           defaultComponents: undefined,
         },
         deepLSettings: {
+          defaultTargetLanguage: undefined,
           apiKey: undefined,
         },
       });

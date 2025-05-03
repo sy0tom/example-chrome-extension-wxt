@@ -1,1 +1,2 @@
-export { default as UserSettings } from "./user-settings";
+export { default as TranslateLanguage } from "./TranslateLanguage";
+export { default as UserSettings } from "./UserSettings";

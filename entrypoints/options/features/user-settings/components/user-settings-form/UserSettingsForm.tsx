@@ -1,12 +1,7 @@
 import { Button } from "@/entrypoints/components/button";
-import {
-  FieldError,
-  FieldValues,
-  Path,
-  useForm,
-  UseFormRegister,
-} from "react-hook-form";
-import { UserSettings } from "~/types";
+import { FormText } from "@/entrypoints/components/form-text";
+import { useForm } from "react-hook-form";
+import { TranslateLanguage, UserSettings } from "~/types";
 
 interface Props {
   userSettings: UserSettings;
@@ -14,8 +9,9 @@ interface Props {
 
 type UserSettingsFormData = {
   jiraApiKey: string | undefined;
-  jiraDefaultTags: string[] | undefined;
+  jiraDefaultLabels: string[] | undefined;
   jiraDefaultComponents: string[] | undefined;
+  translateDefaultTargetLanguage: TranslateLanguage | undefined;
   deepLApiKey: string | undefined;
 };
 
@@ -49,92 +45,94 @@ function UserSettingsForm({ userSettings }: Props) {
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormInput
-          label="Jira Default Tags"
-          name="jiraDefaultTags"
-          type="text"
-          register={register}
-        />
-        <FormInput
-          label="Jira Default Components"
-          name="jiraDefaultComponents"
-          type="text"
-          register={register}
-        />
-        <FormInput
-          label="Jira API Key"
-          name="jiraApiKey"
-          type="password"
-          register={register}
-          error={errors.jiraApiKey}
-        />
-        <FormInput
-          label="DeepL API Key"
-          name="deepLApiKey"
-          type="password"
-          register={register}
-          error={errors.deepLApiKey}
-        />
-        <Button
-          type="button"
-          color="secondary"
-          size="md"
-          text="reset"
-          onClick={onReset}
-        />
-        <Button
-          type="submit"
-          color="primary"
-          size="md"
-          text="registry"
-          disabled={isSubmitting}
-        />
+        <>
+          <div className="px-2 py-2 font-sans">
+            <span className="px-2 py-2 text-lg font-bold font-sans text-gray-600">
+              Jira
+            </span>
+            <hr className="text-gray-300" />
+          </div>
+          <div className="px-2 py-2">
+            <FormText
+              label="Default Labels"
+              name="jiraDefaultLabels"
+              type="text"
+              register={register}
+            />
+            <FormText
+              label="Default Components"
+              name="jiraDefaultComponents"
+              type="text"
+              register={register}
+            />
+            <FormText
+              label="API Key"
+              name="jiraApiKey"
+              type="password"
+              register={register}
+              error={errors.jiraApiKey}
+            />
+          </div>
+        </>
+        <>
+          <div className="px-2 py-2 font-sans">
+            <span className="px-2 py-2 text-lg font-bold font-sans text-gray-600">
+              Translate
+            </span>
+            <hr className="text-gray-300" />
+          </div>
+          <div className="px-2 py-2">
+            <FormText
+              label="DeepL API Key"
+              name="deepLApiKey"
+              type="password"
+              register={register}
+              error={errors.deepLApiKey}
+            />
+          </div>
+        </>
+        <div className="px-2 py-2">
+          <Button
+            type="button"
+            color="secondary"
+            size="md"
+            text="reset"
+            onClick={onReset}
+          />
+          <Button
+            type="submit"
+            color="primary"
+            size="md"
+            text="registry"
+            disabled={isSubmitting}
+          />
+        </div>
       </form>
     </div>
   );
 }
 
-interface FormInputProps<T extends FieldValues> {
-  label: string;
-  name: Path<T>;
-  type: "text" | "password";
-  register: UseFormRegister<T>;
-  error?: FieldError;
-}
-function FormInput<T extends FieldValues>({
-  label,
-  name,
-  type,
-  register,
-  error,
-}: FormInputProps<T>) {
-  return (
-    <div className="mb-4">
-      <label htmlFor={name}>{label}</label>
-      <input id={name} type={type} {...register(name)} />
-      {error && <p className="text-red-500">{error.message}</p>}
-    </div>
-  );
-}
-
-function convertToFormData(userSettings: UserSettings): UserSettingsFormData {
+function convertToFormData(model: UserSettings): UserSettingsFormData {
   return {
-    jiraApiKey: userSettings.jiraSettings.apiKey,
-    jiraDefaultTags: userSettings.jiraSettings.defaultLabels,
-    jiraDefaultComponents: userSettings.jiraSettings.defaultComponents,
-    deepLApiKey: userSettings.deepLSettings.apiKey,
+    jiraApiKey: model.jiraSettings.apiKey,
+    jiraDefaultLabels: model.jiraSettings.defaultLabels,
+    jiraDefaultComponents: model.jiraSettings.defaultComponents,
+    translateDefaultTargetLanguage:
+      model.deepLSettings.defaultTargetLanguage ?? "EN",
+    deepLApiKey: model.deepLSettings.apiKey,
   };
 }
 
-function convertToUserSettings(formData: UserSettingsFormData): UserSettings {
+function convertToUserSettings(form: UserSettingsFormData): UserSettings {
   return {
     jiraSettings: {
-      apiKey: formData.jiraApiKey,
-      defaultLabels: formData.jiraDefaultTags,
-      defaultComponents: formData.jiraDefaultComponents,
+      apiKey: form.jiraApiKey,
+      defaultLabels: form.jiraDefaultLabels,
+      defaultComponents: form.jiraDefaultComponents,
     },
     deepLSettings: {
-      apiKey: formData.deepLApiKey,
+      defaultTargetLanguage: form.translateDefaultTargetLanguage,
+      apiKey: form.deepLApiKey,
     },
   };
 }

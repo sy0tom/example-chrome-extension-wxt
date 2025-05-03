@@ -1,3 +1,5 @@
+import TranslateLanguage from "./TranslateLanguage";
+
 interface UserSettings {
   jiraSettings: {
     apiKey: string | undefined;
@@ -5,6 +7,7 @@ interface UserSettings {
     defaultComponents: string[] | undefined;
   };
   deepLSettings: {
+    defaultTargetLanguage: TranslateLanguage | undefined;
     apiKey: string | undefined;
   };
 }
