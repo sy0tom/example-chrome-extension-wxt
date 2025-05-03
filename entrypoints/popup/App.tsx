@@ -1,3 +1,5 @@
+import { Button } from "../components/button";
+
 function App() {
   const onClickOpenOptionsPage = () => {
     chrome.runtime.openOptionsPage();
@@ -6,7 +8,13 @@ function App() {
   return (
     <>
       <p className="bg-red-500">hello world!</p>
-      <button onClick={onClickOpenOptionsPage}>open settings</button>
+      <Button
+        color="primary"
+        size="md"
+        text="open settings"
+        onClick={onClickOpenOptionsPage}
+      />
+      <div className="bg-primary-dark">aaaa</div>
     </>
   );
 }

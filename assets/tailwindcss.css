@@ -8,17 +8,12 @@
   --breakpoint-xl: 1440px;
 
   /* colors */
-  --color-primary: #4a90e2;
-  --color-secondary: #50e3c2;
-  --color-blue: '#1fb6ff';
-  --color-purple: '#7e5bef';
-  --color-pink: '#ff49db';
-  --color-orange: '#ff7849';
-  --color-green: '#13ce66';
-  --color-yellow: '#ffc82c';
-  --color-gray-dark: '#273444';
-  --color-gray: '#8492a6';
-  --color-gray-light: '#d3dce6';
+  --color-primary: #EB3335;
+  --color-primary-light: #E3645E;
+  --color-primary-dark: #C12123;
+  --color-secondary: #007C80;
+  --color-secondary-light: #66C6C8;
+  --color-secondary-dark: #005656;
 
   /* fontFamily */
   --font-sans: 'Graphik', 'sans-serif';
