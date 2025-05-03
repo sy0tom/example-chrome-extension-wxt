@@ -9,12 +9,13 @@ const IconMap = {
 export type IconType = keyof typeof IconMap;
 
 interface Props {
-  type: IconType;
+  iconType: IconType;
+  fontSize: "inherit" | "small" | "medium" | "large";
 }
 
-function Icon({ type }: Props) {
-  const IconComponent = IconMap[type];
-  return <>{<IconComponent />}</>;
+function Icon({ iconType, fontSize }: Props) {
+  const IconComponent = IconMap[iconType];
+  return <>{<IconComponent className="text-white" fontSize={fontSize} />}</>;
 }
 
 export default Icon;
