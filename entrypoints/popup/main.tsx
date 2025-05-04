@@ -1,4 +1,4 @@
-import App from "@/entrypoints/popup/App.tsx";
+import App from "#/popup/App.tsx";
 import React from "react";
 import ReactDOM from "react-dom/client";
 

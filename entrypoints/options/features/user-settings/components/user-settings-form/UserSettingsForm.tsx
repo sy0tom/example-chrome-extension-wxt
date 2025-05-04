@@ -1,5 +1,6 @@
-import { Button } from "@/entrypoints/components/button";
-import { FormField } from "@/entrypoints/components/form-field";
+import { Button } from "#/components/button";
+import { FormField } from "#/components/form-field";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { TranslateLanguage, TranslateLanguageMap, UserSettings } from "~/types";
 

@@ -1,4 +1,4 @@
-import App from "@/entrypoints/options/App.tsx";
+import App from "#/options/App.tsx";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
