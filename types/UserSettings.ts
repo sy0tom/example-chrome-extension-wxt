@@ -1,4 +1,4 @@
-import TranslateLanguage from "./TranslateLanguage";
+import { TranslateLanguage } from "./TranslateLanguage";
 
 interface UserSettings {
   jiraSettings: {

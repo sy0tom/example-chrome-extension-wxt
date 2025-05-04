@@ -1,7 +1,7 @@
 import { Button } from "@/entrypoints/components/button";
-import { FormText } from "@/entrypoints/components/form-text";
+import { FormField } from "@/entrypoints/components/form-field";
 import { useForm } from "react-hook-form";
-import { TranslateLanguage, UserSettings } from "~/types";
+import { TranslateLanguage, TranslateLanguageMap, UserSettings } from "~/types";
 
 interface Props {
   userSettings: UserSettings;
@@ -53,19 +53,19 @@ function UserSettingsForm({ userSettings }: Props) {
             <hr className="text-gray-300" />
           </div>
           <div className="px-2 py-2">
-            <FormText
+            <FormField
               label="Default Labels"
               name="jiraDefaultLabels"
               type="text"
               register={register}
             />
-            <FormText
+            <FormField
               label="Default Components"
               name="jiraDefaultComponents"
               type="text"
               register={register}
             />
-            <FormText
+            <FormField
               label="API Key"
               name="jiraApiKey"
               type="password"
@@ -82,7 +82,23 @@ function UserSettingsForm({ userSettings }: Props) {
             <hr className="text-gray-300" />
           </div>
           <div className="px-2 py-2">
-            <FormText
+            <FormField
+              label="Default Target Lang"
+              name="translateDefaultTargetLanguage"
+              type="select"
+              options={[...TranslateLanguageMap.entries()].map(
+                ([key, value]) => ({
+                  name: value,
+                  value: key,
+                }),
+              )}
+              // defaultValue={{
+              //   name: "English",
+              //   value: defaultValues.translateDefaultTargetLanguage!,
+              // }}
+              register={register}
+            />
+            <FormField
               label="DeepL API Key"
               name="deepLApiKey"
               type="password"
@@ -117,8 +133,7 @@ function convertToFormData(model: UserSettings): UserSettingsFormData {
     jiraApiKey: model.jiraSettings.apiKey,
     jiraDefaultLabels: model.jiraSettings.defaultLabels,
     jiraDefaultComponents: model.jiraSettings.defaultComponents,
-    translateDefaultTargetLanguage:
-      model.deepLSettings.defaultTargetLanguage ?? "EN",
+    translateDefaultTargetLanguage: model.deepLSettings.defaultTargetLanguage,
     deepLApiKey: model.deepLSettings.apiKey,
   };
 }
