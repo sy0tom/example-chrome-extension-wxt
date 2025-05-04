@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  /* screens */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 976px;
+  --breakpoint-xl: 1440px;
+
+  /* colors */
+  --color-primary: #eb3335;
+  --color-primary-light: #e3645e;
+  --color-primary-dark: #c12123;
+  --color-secondary: #007c80;
+  --color-secondary-light: #66c6c8;
+  --color-secondary-dark: #005656;
+
+  /* fontFamily */
+  --font-sans: "Graphik", "sans-serif";
+  --font-serif: "Merriweather", "serif";
+}
