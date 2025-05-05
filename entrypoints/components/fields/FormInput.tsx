@@ -24,8 +24,20 @@ function FormInput<T extends FieldValues>({
   register,
   error,
 }: Props<T>) {
-  const child = Input({ type, placeholder, name, register });
-  return <FormFieldLayout label={label} child={child} error={error} />;
+  return (
+    <FormFieldLayout
+      label={label}
+      child={
+        <Input
+          type={type}
+          placeholder={placeholder}
+          name={name}
+          register={register}
+        />
+      }
+      error={error}
+    />
+  );
 }
 
 export default FormInput;

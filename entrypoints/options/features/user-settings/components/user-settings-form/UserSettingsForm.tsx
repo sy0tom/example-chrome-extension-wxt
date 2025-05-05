@@ -1,5 +1,6 @@
 import { Button } from "#/components/button";
-import { FormInput, FormSelect, FormTag } from "#/components/fields";
+import { FormInput, FormTag } from "#/components/fields";
+import CFormSelect from "#/components/fields/CFormSelect";
 import { createStorageUserSettingsRepository } from "#/repositories/storage/StorageUserSettingsRepositoryImpl";
 import { createUserSettingsService } from "#/services/UserSettingsService";
 import { useState } from "react";
@@ -87,16 +88,16 @@ function UserSettingsForm({ userSettings }: Props) {
             <hr className="text-gray-300" />
           </div>
           <div className="px-2 py-2">
-            <FormSelect
+            <CFormSelect
               label="Default Target Lang"
-              name="translateDefaultTargetLanguage"
-              options={[...TranslateLanguageMap.entries()].map(
-                ([key, value]) => ({
+              options={[
+                ...TranslateLanguageMap.entries().map(([key, value]) => ({
                   name: value,
                   value: key,
-                }),
-              )}
-              register={register}
+                })),
+              ]}
+              name="translateDefaultTargetLanguage"
+              control={control}
             />
             <FormInput
               label="DeepL API Key"
