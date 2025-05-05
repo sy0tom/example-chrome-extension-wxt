@@ -1,9 +1,7 @@
 import { FieldValues, Path, UseFormRegister } from "react-hook-form";
 
-export type InputType = "text" | "email" | "password" | "number" | "url";
-
 interface Props<T extends FieldValues> {
-  type: InputType;
+  type: "text" | "email" | "password" | "number" | "url";
   placeholder?: string;
   name: Path<T>;
   register: UseFormRegister<T>;

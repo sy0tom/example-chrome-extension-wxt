@@ -1,6 +1,6 @@
 import { Button } from "#/components/button";
-import { FormInput, FormSelect } from "#/components/form-field";
-import TagInput from "#/components/form-field/TagInput";
+import { FormInput, FormSelect, FormTag } from "#/components/fields";
+import TagInput from "#/components/fields/TagInput";
 import { createStorageUserSettingsRepository } from "#/repositories/storage/StorageUserSettingsRepositoryImpl";
 import { createUserSettingsService } from "#/services/UserSettingsService";
 import { useState } from "react";
@@ -67,10 +67,10 @@ function UserSettingsForm({ userSettings }: Props) {
               type="text"
               register={register}
             />
-            <FormInput
+            <FormTag
               label="Default Components"
+              initialValues={defaultValues.jiraDefaultComponents}
               name="jiraDefaultComponents"
-              type="text"
               register={register}
             />
             <FormInput
@@ -156,13 +156,3 @@ function convertToUserSettings(form: UserSettingsFormData): UserSettings {
 }
 
 export default UserSettingsForm;
-
-// async function fetchUserSettingsPost(
-//   model: UserSettings,
-// ): Promise<UserSettings> {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve(model);
-//     }, 1000);
-//   });
-// }

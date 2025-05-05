@@ -4,13 +4,13 @@ import { FieldValues, Path, UseFormRegister } from "react-hook-form";
 
 interface Props<T extends FieldValues> {
   options: { name: string; value: string | number | string[] }[];
-  currentValue?: string | number | string[];
+  initialValue?: string | number | string[];
   name: Path<T>;
   register: UseFormRegister<T>;
 }
 export function Select<T extends FieldValues>({
   options,
-  currentValue,
+  initialValue,
   name,
   register,
 }: Props<T>) {
@@ -25,7 +25,7 @@ export function Select<T extends FieldValues>({
             <option
               key={index}
               value={option.value}
-              selected={option.value === currentValue}
+              selected={option.value === initialValue}
             >
               {option.name}
             </option>
