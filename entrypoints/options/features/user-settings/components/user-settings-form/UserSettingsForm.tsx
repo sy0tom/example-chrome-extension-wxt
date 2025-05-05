@@ -1,5 +1,7 @@
 import { Button } from "#/components/button";
 import { FormField } from "#/components/form-field";
+import { createStorageUserSettingsRepository } from "#/repositories/storage/StorageUserSettingsRepositoryImpl";
+import { createUserSettingsService } from "#/services/UserSettingsService";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { TranslateLanguage, TranslateLanguageMap, UserSettings } from "~/types";
@@ -17,6 +19,10 @@ type UserSettingsFormData = {
 };
 
 function UserSettingsForm({ userSettings }: Props) {
+  const userSettingsService = createUserSettingsService(
+    createStorageUserSettingsRepository(),
+  );
+
   const [defaultValues, setDefaultValues] = useState<UserSettingsFormData>(
     convertToFormData(userSettings),
   );
@@ -32,11 +38,10 @@ function UserSettingsForm({ userSettings }: Props) {
 
   const onSubmit = async (formData: UserSettingsFormData) => {
     console.log(`formData is ${JSON.stringify(formData)}`);
-    const response = await fetchUserSettingsPost(
+    const userSettings = await userSettingsService.saveUserSettings(
       convertToUserSettings(formData),
     );
-    setDefaultValues(convertToFormData(response));
-    console.log(`response is ${JSON.stringify(response)}`);
+    setDefaultValues(convertToFormData(userSettings));
   };
 
   const onReset = () => {
@@ -155,12 +160,12 @@ function convertToUserSettings(form: UserSettingsFormData): UserSettings {
 
 export default UserSettingsForm;
 
-async function fetchUserSettingsPost(
-  model: UserSettings,
-): Promise<UserSettings> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(model);
-    }, 1000);
-  });
-}
+// async function fetchUserSettingsPost(
+//   model: UserSettings,
+// ): Promise<UserSettings> {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(model);
+//     }, 1000);
+//   });
+// }
