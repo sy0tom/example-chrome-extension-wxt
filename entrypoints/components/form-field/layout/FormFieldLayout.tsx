@@ -1,0 +1,26 @@
+import React from "react";
+import { FieldError } from "react-hook-form";
+
+interface Props {
+  label?: string;
+  child: React.ReactNode;
+  error?: FieldError;
+}
+
+function FormFieldLayout({ label, child, error }: Props) {
+  return (
+    <>
+      <div className="px-2 py-2 flex items-center">
+        {label && (
+          <label className="w-72 text-base font-sans text-gray-700">
+            {label}
+          </label>
+        )}
+        {child}
+      </div>
+      {error && <span className="text-red-500">{error.message}</span>}
+    </>
+  );
+}
+
+export default FormFieldLayout;

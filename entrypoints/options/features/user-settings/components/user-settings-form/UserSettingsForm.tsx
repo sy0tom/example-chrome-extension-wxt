@@ -1,5 +1,6 @@
 import { Button } from "#/components/button";
-import { FormField } from "#/components/form-field";
+import { FormInput, FormSelect } from "#/components/form-field";
+import TagInput from "#/components/form-field/TagInput";
 import { createStorageUserSettingsRepository } from "#/repositories/storage/StorageUserSettingsRepositoryImpl";
 import { createUserSettingsService } from "#/services/UserSettingsService";
 import { useState } from "react";
@@ -50,6 +51,7 @@ function UserSettingsForm({ userSettings }: Props) {
 
   return (
     <div className="form-container">
+      <TagInput />
       <form onSubmit={handleSubmit(onSubmit)}>
         <>
           <div className="px-2 py-2 font-sans">
@@ -59,19 +61,19 @@ function UserSettingsForm({ userSettings }: Props) {
             <hr className="text-gray-300" />
           </div>
           <div className="px-2 py-2">
-            <FormField
+            <FormInput
               label="Default Labels"
               name="jiraDefaultLabels"
               type="text"
               register={register}
             />
-            <FormField
+            <FormInput
               label="Default Components"
               name="jiraDefaultComponents"
               type="text"
               register={register}
             />
-            <FormField
+            <FormInput
               label="API Key"
               name="jiraApiKey"
               type="password"
@@ -88,23 +90,18 @@ function UserSettingsForm({ userSettings }: Props) {
             <hr className="text-gray-300" />
           </div>
           <div className="px-2 py-2">
-            <FormField
+            <FormSelect
               label="Default Target Lang"
               name="translateDefaultTargetLanguage"
-              type="select"
               options={[...TranslateLanguageMap.entries()].map(
                 ([key, value]) => ({
                   name: value,
                   value: key,
                 }),
               )}
-              // defaultValue={{
-              //   name: "English",
-              //   value: defaultValues.translateDefaultTargetLanguage!,
-              // }}
               register={register}
             />
-            <FormField
+            <FormInput
               label="DeepL API Key"
               name="deepLApiKey"
               type="password"
