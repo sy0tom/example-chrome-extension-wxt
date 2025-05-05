@@ -1,31 +1,50 @@
 import {
+  Control,
+  Controller,
   FieldError,
   FieldValues,
   Path,
-  UseFormRegister,
 } from "react-hook-form";
-import { Select } from "./field/Select";
+import Select from "./field/Select";
 import FormFieldLayout from "./layout/FormFieldLayout";
 
 interface Props<T extends FieldValues> {
   label: string;
   options: { name: string; value: string | number | string[] }[];
-  initialValue?: string | number | string[];
+  optionHeader?: string;
   name: Path<T>;
-  register: UseFormRegister<T>;
+  control: Control<T>;
   error?: FieldError;
 }
 
 function FormSelect<T extends FieldValues>({
   label,
   options,
-  initialValue,
+  optionHeader,
   name,
-  register,
+  control,
   error,
 }: Props<T>) {
-  const child = Select({ options, initialValue, name, register });
-  return <FormFieldLayout label={label} child={child} error={error} />;
+  return (
+    <FormFieldLayout
+      label={label}
+      error={error}
+      child={
+        <Controller
+          name={name}
+          control={control}
+          render={({ field }) => (
+            <Select
+              options={options}
+              optionHeader={optionHeader}
+              initialValue={field.value}
+              onChange={field.onChange}
+            />
+          )}
+        />
+      }
+    />
+  );
 }
 
 export default FormSelect;

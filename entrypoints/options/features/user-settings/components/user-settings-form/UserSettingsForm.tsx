@@ -1,6 +1,6 @@
 import { Button } from "#/components/button";
 import { FormInput, FormTag } from "#/components/fields";
-import CFormSelect from "#/components/fields/CFormSelect";
+import CFormSelect from "#/components/fields/FormSelect";
 import { createStorageUserSettingsRepository } from "#/repositories/storage/StorageUserSettingsRepositoryImpl";
 import { createUserSettingsService } from "#/services/UserSettingsService";
 import { useState } from "react";
