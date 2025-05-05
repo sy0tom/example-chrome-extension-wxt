@@ -17,7 +17,7 @@ export function Select<T extends FieldValues>({
   return (
     <>
       <select
-        className="w-full py-1 font-sans text-gray-700 rounded border border-gray-100 focus:border-primary focus:outline-none"
+        className="w-full py-1 font-sans text-gray-700 rounded border border-gray-100 focus:border-transparent focus:outline-none"
         {...register(name)}
       >
         {options.map((option, index) => {
