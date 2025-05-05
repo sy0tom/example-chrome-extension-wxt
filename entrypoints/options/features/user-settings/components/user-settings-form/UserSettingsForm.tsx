@@ -1,6 +1,5 @@
 import { Button } from "#/components/button";
 import { FormInput, FormSelect, FormTag } from "#/components/fields";
-import TagInput from "#/components/fields/TagInput";
 import { createStorageUserSettingsRepository } from "#/repositories/storage/StorageUserSettingsRepositoryImpl";
 import { createUserSettingsService } from "#/services/UserSettingsService";
 import { useState } from "react";
@@ -51,7 +50,6 @@ function UserSettingsForm({ userSettings }: Props) {
 
   return (
     <div className="form-container">
-      <TagInput />
       <form onSubmit={handleSubmit(onSubmit)}>
         <>
           <div className="px-2 py-2 font-sans">
