@@ -5,7 +5,7 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { Select } from "./field/Select";
-import LabelLayout from "./layout/FormFieldLayout";
+import FormFieldLayout from "./layout/FormFieldLayout";
 
 interface Props<T extends FieldValues> {
   label: string;
@@ -25,11 +25,7 @@ function FormSelect<T extends FieldValues>({
   error,
 }: Props<T>) {
   const child = Select({ options, initialValue, name, register });
-  return (
-    <>
-      <LabelLayout label={label} child={child} error={error} />
-    </>
-  );
+  return <FormFieldLayout label={label} child={child} error={error} />;
 }
 
 export default FormSelect;

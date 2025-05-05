@@ -24,18 +24,18 @@ function UserSettingsForm({ userSettings }: Props) {
     createStorageUserSettingsRepository(),
   );
 
-  const [defaultValues, setDefaultValues] = useState<UserSettingsFormData>(
-    convertToFormData(userSettings),
-  );
+  const initialValues = convertToFormData(userSettings);
+
+  const [defaultValues, setDefaultValues] =
+    useState<UserSettingsFormData>(initialValues);
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<UserSettingsFormData>({
-    defaultValues: convertToFormData(userSettings),
-  });
+  } = useForm<UserSettingsFormData>({ defaultValues: initialValues });
 
   const onSubmit = async (formData: UserSettingsFormData) => {
     console.log(`formData is ${JSON.stringify(formData)}`);
@@ -69,9 +69,8 @@ function UserSettingsForm({ userSettings }: Props) {
             />
             <FormTag
               label="Default Components"
-              initialValues={defaultValues.jiraDefaultComponents}
               name="jiraDefaultComponents"
-              register={register}
+              control={control}
             />
             <FormInput
               label="API Key"

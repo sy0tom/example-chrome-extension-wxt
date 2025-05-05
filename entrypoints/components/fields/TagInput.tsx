@@ -6,13 +6,23 @@ function TagInput({ currentTags }: Props) {
   const [tags, setTags] = useState<string[]>(currentTags ?? []);
   const [inputValue, setInputValue] = useState(currentTags?.join(" ") ?? "");
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && inputValue && inputValue.trim() !== "") {
+  const isEndKey = (key: string): boolean => {
+    return key === "Enter" || key === " " || key === "Tab";
+  };
+  const handleKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const key = e.key;
+    if (isEndKey(key) && inputValue && inputValue.trim() !== "") {
       e.preventDefault();
       if (!tags.includes(inputValue.trim())) {
         setTags([...tags, inputValue.trim()]);
       }
       setInputValue("");
+      return;
+    }
+
+    if (key === "Backspace" && inputValue === "") {
+      e.preventDefault();
+      setTags(tags.slice(0, -1));
     }
   };
 
@@ -42,7 +52,7 @@ function TagInput({ currentTags }: Props) {
         className="flex-grow bg-transparent outline-none text-black px-1 py-1"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={handleKeyDown}
+        onKeyDown={handleKey}
         placeholder="タグを入力してEnter"
       />
     </div>

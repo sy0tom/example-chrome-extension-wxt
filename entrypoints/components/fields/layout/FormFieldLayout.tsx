@@ -16,7 +16,11 @@ function FormFieldLayout({ label, child, error }: Props) {
             {label}
           </label>
         )}
-        {child}
+        {
+          <div className="px-2 py-2 border border-gray-300 rounded bg-gray-100">
+            {child}
+          </div>
+        }
       </div>
       {error && <span className="text-red-500">{error.message}</span>}
     </>

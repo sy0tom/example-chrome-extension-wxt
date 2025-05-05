@@ -5,7 +5,7 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { Input } from "./field/Input";
-import LabelLayout from "./layout/FormFieldLayout";
+import FormFieldLayout from "./layout/FormFieldLayout";
 
 interface Props<T extends FieldValues> {
   label: string;
@@ -25,11 +25,7 @@ function FormInput<T extends FieldValues>({
   error,
 }: Props<T>) {
   const child = Input({ type, placeholder, name, register });
-  return (
-    <>
-      <LabelLayout label={label} child={child} error={error} />
-    </>
-  );
+  return <FormFieldLayout label={label} child={child} error={error} />;
 }
 
 export default FormInput;

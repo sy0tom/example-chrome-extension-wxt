@@ -1,32 +1,46 @@
 import {
+  Control,
+  Controller,
   FieldError,
   FieldValues,
   Path,
-  UseFormRegister,
 } from "react-hook-form";
 import { Tag } from "./field/Tag";
-import LabelLayout from "./layout/FormFieldLayout";
+import FormFieldLayout from "./layout/FormFieldLayout";
 
 interface Props<T extends FieldValues> {
   label: string;
-  initialValues?: string[];
+  placeholder?: string;
   name: Path<T>;
-  register: UseFormRegister<T>;
+  control: Control<T>;
   error?: FieldError;
 }
 
 function FormTag<T extends FieldValues>({
   label,
-  initialValues,
+  placeholder,
   name,
-  register,
+  control,
   error,
 }: Props<T>) {
-  const child = Tag({ initialValues, name, register });
   return (
-    <>
-      <LabelLayout label={label} child={child} error={error} />
-    </>
+    <FormFieldLayout
+      label={label}
+      error={error}
+      child={
+        <Controller
+          name={name}
+          control={control}
+          render={({ field }) => (
+            <Tag
+              initialValues={field.value}
+              placeholder={placeholder}
+              onChange={field.onChange}
+            />
+          )}
+        />
+      }
+    />
   );
 }
 
