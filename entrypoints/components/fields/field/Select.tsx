@@ -26,7 +26,9 @@ function Select({ options, optionHeader, initialValue, onChange }: Props) {
         className="w-full px-4 py-1 rounded text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {selectedName ?? optionHeader ?? options[0].value}
+        <span className="font-sans text-gray-700 text-base">
+          {selectedName ?? optionHeader ?? options[0].value}
+        </span>
       </button>
 
       {isOpen && (
@@ -41,7 +43,9 @@ function Select({ options, optionHeader, initialValue, onChange }: Props) {
               }}
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
             >
-              {option.name}
+              <span className="font-sans text-gray-700 text-base">
+                {option.name}
+              </span>
             </li>
           ))}
         </ul>

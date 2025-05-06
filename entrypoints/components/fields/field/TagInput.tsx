@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Props<> {
   initialValues?: string[];
@@ -9,6 +9,15 @@ interface Props<> {
 export function TagInput({ initialValues, placeholder, onChange }: Props) {
   const [tags, setTags] = useState<string[]>(initialValues ?? []);
   const [inputValue, setInputValue] = useState("");
+
+  const spanRef = useRef<HTMLSpanElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current && spanRef.current) {
+      inputRef.current.style.width = `${spanRef.current.offsetWidth + 12}px`;
+    }
+  }, [inputValue]);
 
   const isEndKey = (key: string): boolean => {
     return key === "Enter" || key === "Tab" || key === " ";
@@ -46,13 +55,16 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
   };
 
   return (
-    <div className="w-full px-2 rounded flex flex-wrap gap-1">
+    <div
+      className="w-full max-w-full px-2 flex items-center flex-nowrap gap-1 overflow-x-auto overflow-y-hidden whitespace-nowrap scrollbar-thin bg-transparent min-w-0"
+      style={{ scrollbarColor: "#9CA3AF transparent" }}
+    >
       {tags.map((tag, index) => (
         <div
           key={index}
-          className="px-2 py-1 flex items-center bg-red-400 font-sans text-gray-700 text-base rounded"
+          className="px-2 py-1 flex items-center bg-red-400 rounded"
         >
-          <span>{tag}</span>
+          <span className="font-sans text-gray-700 text-base">{tag}</span>
           <button
             type="button"
             className="ml-1 text-sm"
@@ -62,14 +74,23 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
           </button>
         </div>
       ))}
-      <input
-        type="text"
-        className="px-2 flex-grow font-sans text-gray-700 text-base bg-transparent outline-none"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={handleKey}
-        placeholder={placeholder}
-      />
+      <div className="relative">
+        <input
+          ref={inputRef}
+          type="text"
+          className="px-2 bg-transparent outline-none font-sans text-gray-700 text-base"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={handleKey}
+          placeholder={placeholder}
+        />
+        <span
+          ref={spanRef}
+          className="absolute top-0 left-0 invisible whitespace-pre px-2 text-base font-sans"
+        >
+          {inputValue || placeholder || ""}
+        </span>
+      </div>
     </div>
   );
 }

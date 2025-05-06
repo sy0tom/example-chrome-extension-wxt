@@ -17,7 +17,7 @@ function FormFieldLayout({ label, child, error }: Props) {
           </label>
         )}
         {
-          <div className="px-2 py-2 border border-gray-300 rounded bg-gray-100">
+          <div className="px-2 py-2 w-96 border border-gray-300 rounded bg-gray-100">
             {child}
           </div>
         }
