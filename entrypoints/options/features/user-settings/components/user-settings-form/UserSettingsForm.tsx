@@ -60,11 +60,10 @@ function UserSettingsForm({ userSettings }: Props) {
             <hr className="text-gray-300" />
           </div>
           <div className="px-2 py-2">
-            <FormInput
+            <FormTag
               label="Default Labels"
               name="jiraDefaultLabels"
-              type="text"
-              register={register}
+              control={control}
             />
             <FormTag
               label="Default Components"
