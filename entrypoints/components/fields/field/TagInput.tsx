@@ -20,9 +20,8 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
     }
   }, [inputValue]);
 
-  /* TODO  日本語入力の際にEnterを押しても残ってしまう */
-  const isEndKey = (key: string): boolean => {
-    return key === "Enter" || key === "Tab" || key === " ";
+  const isEndKey = (key: string, isComposing: boolean): boolean => {
+    return !isComposing && (key === "Enter" || key === "Tab" || key === " ");
   };
 
   const isBackSpace = (key: string): boolean => {
@@ -31,8 +30,8 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
 
   const handleKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const key = e.key;
-
-    if (isEndKey(key) && inputValue && inputValue.trim() !== "") {
+    const isComposing = e.nativeEvent.isComposing;
+    if (isEndKey(key, isComposing) && inputValue && inputValue.trim() !== "") {
       e.preventDefault();
       if (!tags.includes(inputValue.trim())) {
         updateTag([...tags, inputValue.trim()]);
