@@ -8,6 +8,7 @@ interface Props {
   error?: FieldError;
 }
 
+/* TODO inputタグにフォーカスされたときに枠線をつける */
 function FormFieldLayout({ label, child, error }: Props) {
   return (
     <>

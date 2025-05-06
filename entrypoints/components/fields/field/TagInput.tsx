@@ -20,6 +20,7 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
     }
   }, [inputValue]);
 
+  /* TODO  日本語入力の際にEnterを押しても残ってしまう */
   const isEndKey = (key: string): boolean => {
     return key === "Enter" || key === "Tab" || key === " ";
   };
@@ -55,6 +56,7 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
     onChange(updatedTag);
   };
 
+  /* TODO 入力のインプットが狭く押しづらいのせ修正する */
   return (
     <div
       className="w-full max-w-full px-2 flex items-center flex-nowrap gap-1 overflow-x-auto overflow-y-hidden whitespace-nowrap scrollbar-thin bg-transparent min-w-0"
@@ -95,7 +97,3 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
     </div>
   );
 }
-
-// todo controlの場合、resetが効かない
-// todo 日本語を入力するとEnterの後に残ってしまう
-// todo inputタグにフォーカスされたときに枠線をつける

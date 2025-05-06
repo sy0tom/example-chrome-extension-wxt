@@ -15,6 +15,7 @@ function Select({ options, optionHeader, initialValue, onChange }: Props) {
     return options.find((option) => option.value === value)?.name;
   };
 
+  /* TODO focusが外れた際にリストを閉じる */
   const [isOpen, setIsOpen] = useState(false);
   const [selectedName, setSelectedName] = useState<
     string | number | string[] | undefined
@@ -24,7 +25,7 @@ function Select({ options, optionHeader, initialValue, onChange }: Props) {
     <div className="relative w-64">
       <button
         type="button"
-        className="w-full px-4 py-1 rounded text-left"
+        className="w-full px-4 rounded text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
         <Text text={selectedName ?? optionHeader ?? options[0].value} />

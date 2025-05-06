@@ -107,6 +107,7 @@ function UserSettingsForm({ userSettings }: Props) {
             />
           </div>
         </>
+        {/* TODO controlの場合、resetが効かない */}
         <div className="px-2 py-2">
           <Button
             type="button"
@@ -115,6 +116,7 @@ function UserSettingsForm({ userSettings }: Props) {
             text="reset"
             onClick={onReset}
           />
+          {/* TODO enterを押すと勝手にform送信されるので修正する */}
           <Button
             type="submit"
             color="primary"

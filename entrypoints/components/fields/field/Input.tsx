@@ -15,7 +15,7 @@ export function Input<T extends FieldValues>({
 }: Props<T>) {
   return (
     <input
-      className="py-1 w-full font-sans text-gray-700 text-base rounded border border-gray-100 focus:border-transparent focus:outline-none"
+      className="w-full font-sans text-gray-700 text-base rounded border border-gray-100 focus:border-transparent focus:outline-none"
       type={type}
       placeholder={placeholder}
       {...register(name)}
