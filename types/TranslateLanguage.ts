@@ -1,7 +1,7 @@
 const TranslateLanguageEntries = [
-  ["en", "🇬🇧English"],
-  ["ja", "🇯🇵Japanese"],
-  ["ko", "🇰🇷Korean"],
+  ["en", "🇬🇧 English"],
+  ["ja", "🇯🇵 Japanese"],
+  ["ko", "🇰🇷 Korean"],
 ] as const;
 
 export const TranslateLanguageMap = new Map<string, string>(

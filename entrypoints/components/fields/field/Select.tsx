@@ -32,7 +32,7 @@ function Select({ options, optionHeader, initialValue, onChange }: Props) {
     >
       <button
         type="button"
-        className="w-full px-4 rounded text-left"
+        className="w-full px-2 rounded text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
         <Text text={selectedName ?? optionHeader ?? options[0].value} />

@@ -116,12 +116,12 @@ function UserSettingsForm({ userSettings }: Props) {
             text="reset"
             onClick={onReset}
           />
-          {/* TODO enterを押すと勝手にform送信されるので修正する */}
           <Button
-            type="submit"
+            type="button"
             color="primary"
             size="md"
             text="registry"
+            onClick={handleSubmit(onSubmit)}
             disabled={isSubmitting}
           />
         </div>
