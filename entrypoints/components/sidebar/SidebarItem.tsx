@@ -1,6 +1,5 @@
-import { IconType } from "../icon/Icon";
-import Icon from "../icon/Icon";
 import { tv } from "tailwind-variants";
+import Icon, { IconType } from "../icon/Icon";
 
 const style = tv({
   base: "flex items-center hover:bg-primary-light px-4 py-4",

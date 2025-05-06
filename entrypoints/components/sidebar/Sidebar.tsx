@@ -1,7 +1,7 @@
 import React from "react";
-import SidebarItem from "./SidebarItem";
-import { IconType } from "../icon";
 import { NavLink, useLocation } from "react-router";
+import { IconType } from "../icon";
+import SidebarItem from "./SidebarItem";
 
 interface Props {
   header?: React.ReactNode;

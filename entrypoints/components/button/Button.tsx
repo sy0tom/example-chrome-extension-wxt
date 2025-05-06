@@ -1,10 +1,11 @@
 import { tv } from "tailwind-variants";
 
 interface Props {
+  type?: "button" | "submit" | "reset";
   color: "primary" | "secondary";
   size: "sm" | "md" | "lg";
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
 }
 
@@ -26,13 +27,14 @@ const style = tv({
   },
 });
 
-function Button({ color, size, text, onClick, disabled }: Props) {
+function Button({ type, color, size, text, onClick, disabled }: Props) {
   return (
     <>
       <button
+        type={type ?? "button"}
         className={style({ color, size, disabled })}
         onClick={onClick}
-        disabled={disabled}
+        disabled={disabled ?? false}
       >
         <div className="font-sans text-white">{text}</div>
       </button>
