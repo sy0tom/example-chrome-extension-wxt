@@ -15,14 +15,21 @@ function Select({ options, optionHeader, initialValue, onChange }: Props) {
     return options.find((option) => option.value === value)?.name;
   };
 
-  /* TODO focusが外れた際にリストを閉じる */
   const [isOpen, setIsOpen] = useState(false);
   const [selectedName, setSelectedName] = useState<
     string | number | string[] | undefined
   >(getTranslatedNameByValue(initialValue));
 
   return (
-    <div className="relative w-64">
+    <div
+      className="relative w-64"
+      tabIndex={0}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) {
+          setIsOpen(false);
+        }
+      }}
+    >
       <button
         type="button"
         className="w-full px-4 rounded text-left"
