@@ -1,6 +1,5 @@
 import { Button } from "#/components/button";
-import { FormInput, FormTag } from "#/components/fields";
-import CFormSelect from "#/components/fields/FormSelect";
+import { FormInput, FormSelect, FormTag } from "#/components/form-field";
 import { createStorageUserSettingsRepository } from "#/repositories/storage/StorageUserSettingsRepositoryImpl";
 import { createUserSettingsService } from "#/services/UserSettingsService";
 import { useState } from "react";
@@ -38,7 +37,6 @@ function UserSettingsForm({ userSettings }: Props) {
   } = useForm<UserSettingsFormData>({ defaultValues: initialValues });
 
   const onSubmit = async (formData: UserSettingsFormData) => {
-    console.log(`formData is ${JSON.stringify(formData)}`);
     const userSettings = await userSettingsService.saveUserSettings(
       convertToUserSettings(formData),
     );
@@ -87,7 +85,7 @@ function UserSettingsForm({ userSettings }: Props) {
             <hr className="text-gray-300" />
           </div>
           <div className="px-2 py-2">
-            <CFormSelect
+            <FormSelect
               label="Default Target Lang"
               options={[
                 ...TranslateLanguageMap.entries().map(([key, value]) => ({
@@ -107,7 +105,6 @@ function UserSettingsForm({ userSettings }: Props) {
             />
           </div>
         </>
-        {/* TODO controlの場合、resetが効かない */}
         <div className="px-2 py-2">
           <Button
             type="button"

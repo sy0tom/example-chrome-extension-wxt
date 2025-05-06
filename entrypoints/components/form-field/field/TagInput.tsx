@@ -8,7 +8,7 @@ import {
 } from "react";
 
 interface Props {
-  initialValues?: string[];
+  initialValues: string[];
   placeholder?: string;
   onChange: (value: string[]) => void;
 }
@@ -21,7 +21,7 @@ export const TagInput = forwardRef<TagInputHandle, Props>(function TagInput(
   { initialValues, placeholder, onChange },
   ref,
 ) {
-  const [tags, setTags] = useState<string[]>(initialValues ?? []);
+  const [tags, setTags] = useState<string[]>(initialValues);
   const [inputValue, setInputValue] = useState("");
 
   const spanRef = useRef<HTMLSpanElement>(null);
@@ -32,6 +32,10 @@ export const TagInput = forwardRef<TagInputHandle, Props>(function TagInput(
       inputRef.current.style.width = `${spanRef.current.offsetWidth + 12}px`;
     }
   }, [inputValue]);
+
+  useEffect(() => {
+    setTags(initialValues);
+  }, [initialValues]);
 
   useImperativeHandle(ref, () => ({
     focus: () => inputRef.current?.focus(),

@@ -20,6 +20,10 @@ function Select({ options, optionHeader, initialValue, onChange }: Props) {
     string | number | string[] | undefined
   >(getTranslatedNameByValue(initialValue));
 
+  useEffect(() => {
+    setSelectedName(getTranslatedNameByValue(initialValue));
+  }, [initialValue]);
+
   return (
     <div
       className="relative w-64"

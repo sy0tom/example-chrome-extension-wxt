@@ -37,7 +37,7 @@ function FormSelect<T extends FieldValues>({
             <Select
               options={options}
               optionHeader={optionHeader}
-              initialValue={field.value}
+              initialValue={field.value ?? []}
               onChange={field.onChange}
             />
           )}
