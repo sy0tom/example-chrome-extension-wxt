@@ -15,7 +15,7 @@ interface Props {
 
 function Icon({ iconType, fontSize }: Props) {
   const IconComponent = IconMap[iconType];
-  return <>{<IconComponent className="text-white" fontSize={fontSize} />}</>;
+  return <IconComponent className="text-white" fontSize={fontSize} />;
 }
 
 export default Icon;

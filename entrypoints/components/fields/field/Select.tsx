@@ -1,3 +1,4 @@
+import { Text } from "#/components/text";
 import { useState } from "react";
 
 interface Props {
@@ -26,9 +27,7 @@ function Select({ options, optionHeader, initialValue, onChange }: Props) {
         className="w-full px-4 py-1 rounded text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="font-sans text-gray-700 text-base">
-          {selectedName ?? optionHeader ?? options[0].value}
-        </span>
+        <Text text={selectedName ?? optionHeader ?? options[0].value} />
       </button>
 
       {isOpen && (
@@ -43,9 +42,7 @@ function Select({ options, optionHeader, initialValue, onChange }: Props) {
               }}
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
             >
-              <span className="font-sans text-gray-700 text-base">
-                {option.name}
-              </span>
+              <Text text={option.name} />
             </li>
           ))}
         </ul>

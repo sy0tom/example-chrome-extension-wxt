@@ -1,3 +1,4 @@
+import { Text } from "#/components/text";
 import React from "react";
 import { FieldError } from "react-hook-form";
 
@@ -13,7 +14,7 @@ function FormFieldLayout({ label, child, error }: Props) {
       <div className="px-2 py-2 flex items-center">
         {label && (
           <label className="w-72">
-            <span className="font-sans text-gray-700 text-base">{label}</span>
+            <Text text={label} />
           </label>
         )}
         {

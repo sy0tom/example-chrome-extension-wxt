@@ -1,3 +1,4 @@
+import { Text } from "#/components/text";
 import { useEffect, useRef, useState } from "react";
 
 interface Props<> {
@@ -64,7 +65,7 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
           key={index}
           className="px-2 py-1 flex items-center bg-red-400 rounded"
         >
-          <span className="font-sans text-gray-700 text-base">{tag}</span>
+          <Text text={tag} />
           <button
             type="button"
             className="ml-1 text-sm"
@@ -86,7 +87,7 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
         />
         <span
           ref={spanRef}
-          className="absolute top-0 left-0 invisible whitespace-pre px-2 text-base font-sans"
+          className="absolute top-0 left-0 invisible whitespace-pre px-2 text-gray-700 text-base font-sans"
         >
           {inputValue || placeholder || ""}
         </span>
@@ -95,7 +96,6 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
   );
 }
 
-// todo 横幅と整える
 // todo controlの場合、resetが効かない
 // todo 日本語を入力するとEnterの後に残ってしまう
 // todo inputタグにフォーカスされたときに枠線をつける
