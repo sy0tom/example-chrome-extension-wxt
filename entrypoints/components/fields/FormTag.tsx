@@ -5,7 +5,7 @@ import {
   FieldValues,
   Path,
 } from "react-hook-form";
-import { Tag } from "./field/Tag";
+import { TagInput } from "./field/TagInput";
 import FormFieldLayout from "./layout/FormFieldLayout";
 
 interface Props<T extends FieldValues> {
@@ -32,7 +32,7 @@ function FormTag<T extends FieldValues>({
           name={name}
           control={control}
           render={({ field }) => (
-            <Tag
+            <TagInput
               initialValues={field.value}
               placeholder={placeholder}
               onChange={field.onChange}
