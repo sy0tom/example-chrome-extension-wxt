@@ -1,13 +1,26 @@
 import { Text } from "#/components/text";
-import { useEffect, useRef, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 
-interface Props<> {
+interface Props {
   initialValues?: string[];
   placeholder?: string;
   onChange: (value: string[]) => void;
 }
 
-export function TagInput({ initialValues, placeholder, onChange }: Props) {
+export interface TagInputHandle {
+  focus: () => void;
+}
+
+export const TagInput = forwardRef<TagInputHandle, Props>(function TagInput(
+  { initialValues, placeholder, onChange },
+  ref,
+) {
   const [tags, setTags] = useState<string[]>(initialValues ?? []);
   const [inputValue, setInputValue] = useState("");
 
@@ -19,6 +32,10 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
       inputRef.current.style.width = `${spanRef.current.offsetWidth + 12}px`;
     }
   }, [inputValue]);
+
+  useImperativeHandle(ref, () => ({
+    focus: () => inputRef.current?.focus(),
+  }));
 
   const isEndKey = (key: string, isComposing: boolean): boolean => {
     return !isComposing && (key === "Enter" || key === "Tab" || key === " ");
@@ -55,7 +72,6 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
     onChange(updatedTag);
   };
 
-  /* TODO 入力のインプットが狭く押しづらいのせ修正する */
   return (
     <div
       className="w-full max-w-full px-2 flex items-center flex-nowrap gap-1 overflow-x-auto overflow-y-hidden whitespace-nowrap scrollbar-thin bg-transparent min-w-0"
@@ -80,7 +96,7 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
         <input
           ref={inputRef}
           type="text"
-          className="px-2 bg-transparent outline-none font-sans text-gray-700 text-base"
+          className="bg-transparent outline-none font-sans text-gray-700 text-base"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKey}
@@ -95,4 +111,4 @@ export function TagInput({ initialValues, placeholder, onChange }: Props) {
       </div>
     </div>
   );
-}
+});

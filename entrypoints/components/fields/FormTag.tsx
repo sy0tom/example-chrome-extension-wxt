@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import {
   Control,
   Controller,
@@ -23,24 +24,29 @@ function FormTag<T extends FieldValues>({
   control,
   error,
 }: Props<T>) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   return (
-    <FormFieldLayout
-      label={label}
-      error={error}
-      child={
-        <Controller
-          name={name}
-          control={control}
-          render={({ field }) => (
-            <TagInput
-              initialValues={field.value}
-              placeholder={placeholder}
-              onChange={field.onChange}
-            />
-          )}
-        />
-      }
-    />
+    <div onClick={() => inputRef.current?.focus()}>
+      <FormFieldLayout
+        label={label}
+        error={error}
+        child={
+          <Controller
+            name={name}
+            control={control}
+            render={({ field }) => (
+              <TagInput
+                ref={inputRef}
+                initialValues={field.value}
+                placeholder={placeholder}
+                onChange={field.onChange}
+              />
+            )}
+          />
+        }
+      />
+    </div>
   );
 }
 
